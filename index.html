@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>University Society Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <h1>University Society Portal</h1>
+    <p>Join one society and take part in its activities and events.</p>
+  </header>
+
+  <!-- Menu: switches between the four sections -->
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="societies" onclick="showTab('societies')">Societies</button>
+    <button class="tab-btn" data-tab="membership" onclick="showTab('membership')">Membership</button>
+    <button class="tab-btn" data-tab="activities" onclick="showTab('activities')">Activities</button>
+    <button class="tab-btn" data-tab="events" onclick="showTab('events')">Event Registration</button>
+  </nav>
+
+  <main>
+
+    <!-- 1. SOCIETIES -->
+    <section id="societies" class="tab-panel">
+      <h2>Societies</h2>
+      <p class="hint">You can be in only one society at a time.</p>
+      <div id="societyList" class="grid"></div>
+    </section>
+
+    <!-- 2. MEMBERSHIP -->
+    <section id="membership" class="tab-panel" hidden>
+      <h2>My Membership</h2>
+
+      <div id="memberEmpty" class="panel">
+        <p>You are not in any society yet.</p>
+        <button class="btn" onclick="showTab('societies')">Browse societies</button>
+      </div>
+
+      <div id="memberInfo" class="panel" hidden>
+        <dl>
+          <dt>Society</dt>      <dd id="mSociety"></dd>
+          <dt>Role</dt>         <dd id="mRole"></dd>
+          <dt>Name</dt>         <dd id="mName"></dd>
+          <dt>Roll number</dt>  <dd id="mRoll"></dd>
+          <dt>Email</dt>        <dd id="mEmail"></dd>
+          <dt>Joined on</dt>    <dd id="mDate"></dd>
+          <dt>Events registered</dt> <dd id="mEvents"></dd>
+        </dl>
+        <button class="btn danger" onclick="leaveSociety()">Leave society</button>
+      </div>
+    </section>
+
+    <!-- 3. ACTIVITIES -->
+    <section id="activities" class="tab-panel" hidden>
+      <h2>Activities</h2>
+      <p class="hint">What each society does during the semester.</p>
+      <div id="activityList" class="grid"></div>
+    </section>
+
+    <!-- 4. EVENT REGISTRATION -->
+    <section id="events" class="tab-panel" hidden>
+      <h2>Event Registration</h2>
+      <p class="hint">You can register for events of the society you belong to.</p>
+      <div id="eventList" class="grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Join form -->
+  <dialog id="joinDialog">
+    <form id="joinForm" novalidate>
+      <h2 id="dialogTitle">Join society</h2>
+
+      <label for="name">Full name</label>
+      <input id="name" type="text" autocomplete="name">
+
+      <label for="roll">Roll number</label>
+      <input id="roll" type="text">
+
+      <label for="email">University email</label>
+      <input id="email" type="email" autocomplete="email">
+
+      <fieldset>
+        <legend>How do you want to take part?</legend>
+        <label class="radio"><input type="radio" name="role" value="Member"> Member (regular and committed)</label>
+        <label class="radio"><input type="radio" name="role" value="Attendee"> Attendee (come to events)</label>
+      </fieldset>
+
+      <p id="formError" class="error" role="alert"></p>
+
+      <div class="actions">
+        <button type="button" class="btn secondary" onclick="closeForm()">Cancel</button>
+        <button type="submit" class="btn">Enrol</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Small message that pops up after an action -->
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <footer>Semester project &ndash; HTML, CSS and JavaScript only</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
